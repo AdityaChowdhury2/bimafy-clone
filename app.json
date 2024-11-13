@@ -2,10 +2,11 @@
   "expo": {
     "name": "bimafy-clone",
     "slug": "bimafy-clone",
+    "jsEngine": "hermes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "bimafy-clone",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
