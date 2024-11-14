@@ -112,7 +112,7 @@ export default function RootLayout() {
                         onPress={() => navigation.navigate("(tabs)")}
                       />
                       <ThemedText className="text-center flex-1 py-3">
-                        Page 2
+                        Submissions
                       </ThemedText>
                     </SafeAreaView>
                   </View>

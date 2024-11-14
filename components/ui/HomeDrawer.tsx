@@ -28,7 +28,7 @@ export default function HomeDrawer({ isOpen, setIsOpen }: { isOpen: boolean, set
         <View style={styles.container}>
             {isOpen && <Animated.View style={[styles.drawer, { left: slideAnim }]}>
                 <TouchableOpacity onPress={() => handleNavigation("#page1")}>
-                    <Text style={styles.link}>Page 1</Text>
+                    <Text style={styles.link}>Page 1sfa</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleNavigation("#page2")}>
                     <Text style={styles.link}>Page 2</Text>

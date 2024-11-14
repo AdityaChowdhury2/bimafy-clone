@@ -17,6 +17,7 @@ const MAPPING = {
   'line.3.horizontal': 'menu',
   'plus.circle.fill': 'add',
   'chevron.left': 'arrow-back-ios-new',
+
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

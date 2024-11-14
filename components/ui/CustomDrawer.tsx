@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, Dimensions, Pressable, Easing } from 'react-native';
 import { Href, useRouter } from 'expo-router';
 import { cn } from '@/lib/cn';
+import { IconSymbol } from './IconSymbol';
+import { House, List, Zap, } from 'lucide-react-native';
+import { Colors } from '@/constants/Colors';
+
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -52,6 +56,7 @@ export default function CustomDrawer({ isVisible, onClose, onSheetPress }: Custo
                 <Pressable className={cn('flex-1', isVisible && 'bg-black/20')} onPress={onClose} />
                 {/* Drawer Container */}
                 <Animated.View
+                    className={cn('space-y-4')}
                     style={[styles.drawerContainer, { left: slideAnim }]}
                     onTouchStart={e => e.stopPropagation()}
                 >
@@ -59,17 +64,23 @@ export default function CustomDrawer({ isVisible, onClose, onSheetPress }: Custo
                         <Text className='text-white text-center py-2 px-1 bg-[#2B3A55] rounded-md'>Login/SignUp</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => handleNavigation('page1' as Href)}>
-                        <Text style={styles.drawerLink}>Page 1</Text>
+                        <View className='flex-row items-center justify-start gap-2'>
+                            <House size={18} color={'white'} />
+                            <Text className={cn('text-white text-lg py-2')}>Dashboard</Text>
+                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => handleNavigation('page2' as Href)}>
-                        <Text style={styles.drawerLink}>Page 2</Text>
+                        <View className='flex-row items-center justify-start gap-2'>
+                            <List size={18} color={'white'} />
+                            <Text className={cn('text-white text-lg py-2')}>Submission List</Text>
+                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => handleNavigation('page3' as Href)}>
-                        <Text style={styles.drawerLink}>Page 3</Text>
+                        <View className='flex-row items-center justify-start gap-2'>
+                            <Zap size={18} color={'white'} />
+                            <Text className={cn('text-white text-lg py-2')}>Claims List</Text>
+                        </View>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-                        <Text style={styles.closeButtonText}>Close Drawer</Text>
-                    </TouchableOpacity> */}
                 </Animated.View>
             </View>
         )
