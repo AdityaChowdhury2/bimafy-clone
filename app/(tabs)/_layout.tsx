@@ -1,18 +1,25 @@
-import { RelativePathString, Tabs, useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { Animated, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler'
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { SafeAreaView } from '@/components/core/safe-area-view';
-import SheetModal from '@/components/ui/SheetModal';
-import AuthForm from '@/components/AuthForm';
-import CustomHeader from '@/components/ui/Header';
-import { useLocalSearchParams } from 'expo-router';
-import { useToggleDrawer } from '@/hooks/useToggleDrawer';
+import { RelativePathString, Tabs, useRouter } from "expo-router";
+import React, { useState } from "react";
+import {
+  Animated,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { HapticTab } from "@/components/HapticTab";
+import { IconSymbol } from "@/components/ui/IconSymbol";
+import TabBarBackground from "@/components/ui/TabBarBackground";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { SafeAreaView } from "@/components/core/safe-area-view";
+import SheetModal from "@/components/ui/SheetModal";
+import AuthForm from "@/components/AuthForm";
+import CustomHeader from "@/components/ui/Header";
+import { useLocalSearchParams } from "expo-router";
+import { useToggleDrawer } from "@/hooks/useToggleDrawer";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -39,33 +46,36 @@ export default function TabLayout() {
 
   const toggleSheet = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   return (
     <>
       <CustomHeader onMenuPress={toggleDrawer} />
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
           headerShown: false,
           tabBarButton: HapticTab,
           tabBarBackground: TabBarBackground,
           tabBarStyle: Platform.select({
             ios: {
               // Use a transparent background on iOS to show the blur effect
-              position: 'absolute',
+              position: "absolute",
             },
             default: {},
           }),
-        }}>
+        }}
+      >
         <Tabs.Screen
           name="index"
           options={{
-            title: 'Home',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+            title: "Home",
+            tabBarIcon: ({ color }) => (
+              <IconSymbol size={28} name="house.fill" color={color} />
+            ),
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="add"
           options={{
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="plus.circle.fill" color={color} />,
@@ -77,16 +87,22 @@ export default function TabLayout() {
               setIsOpen(true);
             }
           }}
-        />
+        /> */}
         <Tabs.Screen
           name="explore"
           options={{
-            title: 'Explore',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+            title: "Explore",
+            tabBarIcon: ({ color }) => (
+              <IconSymbol size={28} name="paperplane.fill" color={color} />
+            ),
           }}
         />
       </Tabs>
-      <SheetModal isVisible={isOpen} setIsVisible={setIsOpen} onClose={toggleSheet}>
+      <SheetModal
+        isVisible={isOpen}
+        setIsVisible={setIsOpen}
+        onClose={toggleSheet}
+      >
         <AuthForm />
       </SheetModal>
     </>
@@ -98,16 +114,16 @@ const styles = StyleSheet.create({
   },
   toggleText: {
     fontSize: 24,
-    color: '#000',
+    color: "#000",
   },
   drawer: {
-    position: 'absolute',
+    position: "absolute",
     top: 50,
     width: 250,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 5,
     padding: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -116,6 +132,6 @@ const styles = StyleSheet.create({
   link: {
     fontSize: 18,
     paddingVertical: 8,
-    color: '#007aff',
+    color: "#007aff",
   },
 });
