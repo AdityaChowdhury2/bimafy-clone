@@ -8,11 +8,16 @@ import 'react-native-reanimated';
 import '../global.css';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Header } from 'react-native/Libraries/NewAppScreen';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import CustomHeader from '@/components/ui/Header';
 import CustomDrawer from '@/components/ui/CustomDrawer';
 import SheetModal from '@/components/ui/SheetModal';
+import AuthForm from '@/components/AuthForm';
+import { ToggleDrawerProvider } from '@/hooks/useToggleDrawer';
+import { Button } from 'react-native';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text } from 'react-native';
+import { ThemedText } from '@/components/ThemedText';
 // import { SafeAreaView } from '@/components/core/safe-area-view';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -52,15 +57,41 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <CustomHeader onMenuPress={toggleDrawer} />
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <ToggleDrawerProvider toggleDrawer={toggleDrawer}>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="page1" options={({ navigation }) => ({
+              headerShown: true,
+              header: () => (
+                <View style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  backgroundColor: 'white',
+                  paddingHorizontal: 16,
+                }}>
+                  <SafeAreaView style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <IconSymbol
+                      name="chevron.left"
+                      size={16}
+                      color="black"
+                      onPress={() => navigation.navigate('(tabs)')}
+                    />
+                    <ThemedText className='text-center flex-1 py-3'>Page 1</ThemedText>
+                  </SafeAreaView>
+                </View>
+              )
+            })} />
+            <Stack.Screen name="page2" />
+            <Stack.Screen name="page3" />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ToggleDrawerProvider>
         <StatusBar style="auto" />
         <CustomDrawer isVisible={isDrawerOpen} onClose={toggleDrawer} onSheetPress={toggleSheet} />
-        <SheetModal isVisible={isSheetOpen} setIsVisible={setIsSheetOpen} onClose={toggleSheet} />
-      </GestureHandlerRootView>
-    </ThemeProvider>
+        <SheetModal isVisible={isSheetOpen} setIsVisible={setIsSheetOpen} onClose={toggleSheet}>
+          <AuthForm />
+        </SheetModal>
+      </GestureHandlerRootView >
+    </ThemeProvider >
   );
 }

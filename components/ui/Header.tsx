@@ -34,7 +34,7 @@ export default function CustomHeader({ onMenuPress }: HeaderProps) {
 
                     {/* Center Logo */}
                     <View style={styles.logoContainer}>
-                        <Image source={require('@/assets/images/icon.png')} style={styles.logo} resizeMode="contain" />
+                        <Image source={require('@/assets/images/images.png')} style={styles.logo} resizeMode="contain" />
                     </View>
 
                     {/* Right Icons */}

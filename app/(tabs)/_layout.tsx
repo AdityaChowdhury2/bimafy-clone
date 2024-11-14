@@ -9,6 +9,10 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { SafeAreaView } from '@/components/core/safe-area-view';
 import SheetModal from '@/components/ui/SheetModal';
+import AuthForm from '@/components/AuthForm';
+import CustomHeader from '@/components/ui/Header';
+import { useLocalSearchParams } from 'expo-router';
+import { useToggleDrawer } from '@/hooks/useToggleDrawer';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -16,19 +20,22 @@ export default function TabLayout() {
   const slideAnim = useState(new Animated.Value(-250))[0]; // Initial position is off-screen
   const router = useRouter();
 
-  const toggleDrawer = () => {
-    Animated.timing(slideAnim, {
-      toValue: isOpen ? -250 : 0,
-      duration: 300,
-      useNativeDriver: false,
-    }).start();
-    setIsOpen(!isOpen);
-  };
+  // Retrieve initialParams using useLocalSearchParams
+  const toggleDrawer = useToggleDrawer() as () => void;
 
-  const handleNavigation = (path: RelativePathString) => {
-    router.replace(path);
-    toggleDrawer(); // Close drawer after navigation
-  };
+  // const toggleDrawer = () => {
+  //   Animated.timing(slideAnim, {
+  //     toValue: isOpen ? -250 : 0,
+  //     duration: 300,
+  //     useNativeDriver: false,
+  //   }).start();
+  //   setIsOpen(!isOpen);
+  // };
+
+  // const handleNavigation = (path: RelativePathString) => {
+  //   router.replace(path);
+  //   toggleDrawer(); // Close drawer after navigation
+  // };
 
   const toggleSheet = () => {
     setIsOpen(!isOpen);
@@ -36,6 +43,7 @@ export default function TabLayout() {
 
   return (
     <>
+      <CustomHeader onMenuPress={toggleDrawer} />
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -78,7 +86,9 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      <SheetModal isVisible={isOpen} setIsVisible={setIsOpen} onClose={toggleSheet} />
+      <SheetModal isVisible={isOpen} setIsVisible={setIsOpen} onClose={toggleSheet}>
+        <AuthForm />
+      </SheetModal>
     </>
   );
 }

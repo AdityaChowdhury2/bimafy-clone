@@ -16,6 +16,7 @@ const MAPPING = {
   'chevron.right': 'chevron-right',
   'line.3.horizontal': 'menu',
   'plus.circle.fill': 'add',
+  'chevron.left': 'arrow-back-ios-new',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
@@ -35,12 +36,14 @@ export function IconSymbol({
   size = 24,
   color,
   style,
+  ...rest
 }: {
   name: IconSymbolName;
   size?: number;
   color: string | OpaqueColorValue;
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
+  onPress?: () => void;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} {...rest} />;
 }

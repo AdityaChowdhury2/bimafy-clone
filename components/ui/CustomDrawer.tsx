@@ -58,13 +58,13 @@ export default function CustomDrawer({ isVisible, onClose, onSheetPress }: Custo
                     <TouchableOpacity className='m-4' onPress={() => { console.log('button clicked to open sheet'); onSheetPress(); }}>
                         <Text className='text-white text-center py-2 px-1 bg-[#2B3A55] rounded-md'>Login/SignUp</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleNavigation('/page1' as Href)}>
+                    <TouchableOpacity onPress={() => handleNavigation('page1' as Href)}>
                         <Text style={styles.drawerLink}>Page 1</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleNavigation('/page2' as Href)}>
+                    <TouchableOpacity onPress={() => handleNavigation('page2' as Href)}>
                         <Text style={styles.drawerLink}>Page 2</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleNavigation('/page3' as Href)}>
+                    <TouchableOpacity onPress={() => handleNavigation('page3' as Href)}>
                         <Text style={styles.drawerLink}>Page 3</Text>
                     </TouchableOpacity>
                     {/* <TouchableOpacity onPress={onClose} style={styles.closeButton}>
